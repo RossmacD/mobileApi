@@ -140,35 +140,35 @@ class Mobile_Api_Controller {
      *
      * @return array The sample schema for a post
      */
-    // public function get_item_schema() {
-    //     if ( $this->schema ) {
-    //         // Since WordPress 5.3, the schema can be cached in the $schema property.
-    //         return $this->schema;
-    //     }
+    public function get_item_schema() {
+        if ( $this->schema ) {
+            // Since WordPress 5.3, the schema can be cached in the $schema property.
+            return $this->schema;
+        }
  
-    //     $this->schema = array(
-    //         // This tells the spec of JSON Schema we are using which is draft 4.
-    //         '$schema'              => 'http://json-schema.org/draft-04/schema#',
-    //         // The title property marks the identity of the resource.
-    //         'title'                => 'post',
-    //         'type'                 => 'object',
-    //         // In JSON Schema you can specify object properties in the properties attribute.
-    //         'properties'           => array(
-    //             'id' => array(
-    //                 'description'  => esc_html__( 'Unique identifier for the object.', 'my-textdomain' ),
-    //                 'type'         => 'integer',
-    //                 'context'      => array( 'view', 'edit', 'embed' ),
-    //                 'readonly'     => true,
-    //             ),
-    //             'content' => array(
-    //                 'description'  => esc_html__( 'The content for the object.', 'my-textdomain' ),
-    //                 'type'         => 'string',
-    //             ),
-    //         ),
-    //     );
+        $this->schema = array(
+            // This tells the spec of JSON Schema we are using which is draft 4.
+            '$schema'              => 'http://json-schema.org/draft-04/schema#',
+            // The title property marks the identity of the resource.
+            'title'                => 'post',
+            'type'                 => 'object',
+            // In JSON Schema you can specify object properties in the properties attribute.
+            'properties'           => array(
+                'id' => array(
+                    'description'  => esc_html__( 'Unique identifier for the object.', 'my-textdomain' ),
+                    'type'         => 'integer',
+                    'context'      => array( 'view', 'edit', 'embed' ),
+                    'readonly'     => true,
+                ),
+                'content' => array(
+                    'description'  => esc_html__( 'The content for the object.', 'my-textdomain' ),
+                    'type'         => 'string',
+                ),
+            ),
+        );
  
-    //     return $this->schema;
-    // }
+        return $this->schema;
+    }
  
     
 }
