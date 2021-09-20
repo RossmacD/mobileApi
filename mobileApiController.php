@@ -175,6 +175,7 @@ class Mobile_Api_Controller {
  
 // Function to register our new routes from the controller.
 function prefix_register_my_rest_routes() {
+    var_dump("Registered");
     $controller = new Mobile_Api_Controller();
     $controller->register_routes();
 }
