@@ -98,10 +98,15 @@ class Mobile_Api_Controller {
         if ( isset( $schema['properties']['id'] ) ) {
             $post_data['id'] = (int) $post->ID;
         }
+
+        if ( isset( $schema['properties']['title'] ) ) {
+            $post_data['title'] = apply_filters( 'the_title', $post->post_title, $post );
+        }
  
         if ( isset( $schema['properties']['content'] ) ) {
-            $post_data['content'] = apply_filters( 'the_content', $post->post_content, $post );
+            $post_data['content'] = wp_strip_all_tags(apply_filters( 'the_content', $post->post_content, $post ));
         }
+
  
         return rest_ensure_response( $post_data );
     }
@@ -160,6 +165,18 @@ class Mobile_Api_Controller {
                     'context'      => array( 'view', 'edit', 'embed' ),
                     'readonly'     => true,
                 ),
+                'title' => array(
+                    'description'  => esc_html__( 'The content for the object.', 'my-textdomain' ),
+                    'type'         => 'string',
+                ),
+                'tagline' => array(
+                    'description'  => esc_html__( 'The content for the object.', 'my-textdomain' ),
+                    'type'         => 'string',
+                ),
+                'address' => array(
+                    'description'  => esc_html__( 'The content for the object.', 'my-textdomain' ),
+                    'type'         => 'string',
+                ),
                 'content' => array(
                     'description'  => esc_html__( 'The content for the object.', 'my-textdomain' ),
                     'type'         => 'string',
@@ -175,9 +192,17 @@ class Mobile_Api_Controller {
  
 // Function to register our new routes from the controller.
 function prefix_register_my_rest_routes() {
-    var_dump("Registered");
     $controller = new Mobile_Api_Controller();
     $controller->register_routes();
 }
  
+
+// Accepting zero/one arguments.
+// function strip() {
+//     ...
+//     return 'some value';
+// }
+// add_filter( 'hook', 'example_callback' );
+
+
 add_action( 'rest_api_init', 'prefix_register_my_rest_routes' );
