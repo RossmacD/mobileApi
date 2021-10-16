@@ -121,6 +121,8 @@ class Mobile_Api_Controller {
         
         $post_data["main_banner"] = wp_get_attachment_image_url($acfFields["main_banner"][0]);
 
+        $post_data["facilities"] = get_field("facilities",$post->ID);
+
         $post_data['acf'] = $acfFields;
 
         return rest_ensure_response( $post_data );
