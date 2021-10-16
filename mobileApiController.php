@@ -112,14 +112,14 @@ class Mobile_Api_Controller {
         $post_data["tagline"] = $acfFields["tagline"];
         $post_data["address"] = $acfFields["location_map"]["address"];
 
+        // Get all image urls
         $post_data["gallery"] =array();
-
         foreach( $acfFields["gallery"] as $image){
-            $post_data["gallery"][] = wp_get_attachment_image_src($image);
+            $post_data["gallery"][] = wp_get_attachment_image_url($image);
             // echo $array_values . "<br>";
-        
         }
-
+        
+        $post_data["main_banner"] = wp_get_attachment_image_url($acfFields["main_banner"][0]);
 
         $post_data['acf'] = $acfFields;
 
