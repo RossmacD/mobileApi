@@ -106,8 +106,8 @@ class Mobile_Api_Controller {
         if ( isset( $schema['properties']['content'] ) ) {
             $post_data['content'] = wp_strip_all_tags(apply_filters( 'the_content', $post->post_content, $post ));
         }
+        $post_data['acf'] = get_fields($post->ID);
 
- 
         return rest_ensure_response( $post_data );
     }
  
