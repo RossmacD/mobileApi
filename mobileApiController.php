@@ -106,7 +106,22 @@ class Mobile_Api_Controller {
         if ( isset( $schema['properties']['content'] ) ) {
             $post_data['content'] = wp_strip_all_tags(apply_filters( 'the_content', $post->post_content, $post ));
         }
-        $post_data['acf'] = get_fields($post->ID);
+
+        $acfFields = get_fields($post->ID);
+
+        $post_data["tagline"] = $acfFields["tagline"];
+        $post_data["address"] = $acfFields["location_map"]["address"];
+
+        $post_data["gallery"] =array();
+
+        foreach( $acfFields["gallery"] as $image){
+            $post_data["gallery"][] = wp_get_attachment_image_src($image);
+            // echo $array_values . "<br>";
+        
+        }
+
+
+        $post_data['acf'] = $acfFields;
 
         return rest_ensure_response( $post_data );
     }
