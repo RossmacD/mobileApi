@@ -54,12 +54,12 @@ class Mobile_Api_Controller
     public function get_items($request)
     {
         $perPage = 5;
-        if ( ! empty( $request['per_page'] )) {
+        if ( isset( $request['per_page'] )) {
             $perPage = $request['per_page'];
         }
 
         $page = 1;
-        if ( ! empty( $request['page'] )) {
+        if ( isset( $request['page'] )) {
             $page = $request['page'];
         }
 
