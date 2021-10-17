@@ -68,7 +68,8 @@ class Mobile_Api_Controller
         $posts = get_posts($args);
 
         $data = [];
-
+        $data[] = $perPage;
+        $data[] = $page;
         if (empty($posts)) {
             return rest_ensure_response($data);
         }
