@@ -184,7 +184,7 @@ class Mobile_Api_Controller {
               }
             }
 
-            $result[] = $facility;
+            $result[] = $processedTerm;
         } 
         return $result;
     }
