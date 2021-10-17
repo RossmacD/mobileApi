@@ -144,6 +144,7 @@ class Mobile_Api_Controller {
                 $facility->term  = get_field('term','facilities_' . $term->term_id);
                 $facility->icon  = get_field('icon','facilities_' . $term->term_id);
                 $post_data["facilities"][] = $facility;
+                $post_data["facilities"][] = $term->term_id;
             }     
 
 
