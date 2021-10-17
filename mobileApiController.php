@@ -134,28 +134,31 @@ class Mobile_Api_Controller {
             
             // $post_data["facilities"][] = get_field( 'term', "facilities" );
             
-            $facilities= get_the_terms($post->ID,'facilities');
+            // $facilities= get_the_terms($post->ID,'facilities');
 
-            $post_data["facilities"] =array();
+            // $post_data["facilities"] =array();
 
 
-        foreach($facilities as $term ){
-                $facility = new stdClass;
-                $facility->name  = $term->name;
-                $ico  = get_field('icon','facilities_' . $term->term_id);
+            // foreach($facilities as $term ){
+            //     $facility = new stdClass;
+            //     $facility->name  = $term->name;
+            //     $ico  = get_field('icon','facilities_' . $term->term_id);
 
-                if($ico){
-                    if (strpos($ico, 'http') !== false) {
-                      $facility->icon = $ico ;
-                  } else {
-                      $ico = wp_get_attachment_image_src( $ico, 'thumbnail' ); 
-                      $facility->icon = $ico[0];
-                  }
-                }
+            //     if($ico){
+            //         if (strpos($ico, 'http') !== false) {
+            //           $facility->icon = $ico ;
+            //       } else {
+            //           $ico = wp_get_attachment_image_src( $ico, 'thumbnail' ); 
+            //           $facility->icon = $ico[0];
+            //       }
+            //     }
 
-                $post_data["facilities"][] = $facility;
-            }     
+            //     $post_data["facilities"][] = $facility;
+            // }     
 
+
+            $post_data["facilities"] = getTermIcons("facilities", $post->ID);
+            $post_data["restrictions"] = getTermIcons("restrictions", $post->ID);
 
 
         $post_data['acf'] = $acfFields;
@@ -163,6 +166,30 @@ class Mobile_Api_Controller {
         return rest_ensure_response( $post_data );
     }
  
+    private function getTermIcons($field, $postId ){
+        $terms= get_the_terms($postId, $field);
+        $result=array();
+
+        foreach($terms as $term ){
+            $processedTerm = new stdClass;
+            $processedTerm->name  = $term->name;
+            $ico  = get_field('icon',$field.'_' . $term->term_id);
+
+            if($ico){
+                if (strpos($ico, 'http') !== false) {
+                  $processedTerm->icon = $ico ;
+              } else {
+                  $ico = wp_get_attachment_image_src( $ico, 'thumbnail' ); 
+                  $processedTerm->icon = $ico[0];
+              }
+            }
+
+            $result[] = $facility;
+        } 
+        return $result;
+    }
+
+
     /**
      * Prepare a response for inserting into a collection of responses.
      *
