@@ -22,6 +22,17 @@ class Mobile_Api_Controller
             // Register our schema callback.
             // 'schema' => array( $this, 'get_item_schema' ),
         ]);
+
+        register_rest_route($this->namespace, '/'.$this->resource_name. '/(?P<id>\d+)', [
+            // Here we register the readable endpoint for collections.
+            [
+                'methods' => 'GET',
+                'callback' => [$this, 'get_item'],
+                'permission_callback' => [$this, 'get_items_permissions_check'],
+            ],
+            // Register our schema callback.
+            // 'schema' => array( $this, 'get_item_schema' ),
+        ]);
     }
 
     /**
