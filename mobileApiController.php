@@ -141,10 +141,19 @@ class Mobile_Api_Controller {
 
         foreach($facilities as $term ){
                 $facility = new stdClass;
-                $facility->term  = get_field('term','facilities_' . $term->term_id);
-                $facility->icon  = get_field('icon','facilities_' . $term->term_id);
+                $facility->name  = $term->name;
+                $ico  = get_field('icon','facilities_' . $term->term_id);
+
+                if($ico){
+                    if (strpos($ico, 'http') !== false) {
+                      $facility->icon = $ico ;
+                  } else {
+                      $ico = wp_get_attachment_image_src( $ico, 'thumbnail' ); 
+                      $facility->icon = $ico[0];
+                  }
+                }
+
                 $post_data["facilities"][] = $facility;
-                $post_data["facilities"][] = $term->name;
             }     
 
 
