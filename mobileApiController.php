@@ -157,8 +157,8 @@ class Mobile_Api_Controller {
             // }     
 
 
-            $post_data["facilities"] = getTermIcons("facilities", $post->ID);
-            $post_data["restrictions"] = getTermIcons("restrictions", $post->ID);
+            $post_data["facilities"] = $this->getTermIcons("facilities", $post->ID);
+            $post_data["restrictions"] = $this->getTermIcons("restrictions", $post->ID);
 
 
         $post_data['acf'] = $acfFields;
