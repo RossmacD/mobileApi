@@ -53,9 +53,21 @@ class Mobile_Api_Controller
      */
     public function get_items($request)
     {
+        $perPage = 5;
+        if ( ! empty( $request['per_page'] )) {
+            $perPage = $request['per_page'];
+        }
+
+        $page = 1;
+        if ( ! empty( $request['page'] )) {
+            $page = $request['page'];
+        }
+
+
+
         $args = [
-            'post_per_page' => 5,
-            'page' => 1,
+            'post_per_page' => $perPage,
+            'page' => $page,
             'post_type' => ['places'],
         ];
 
