@@ -61,14 +61,14 @@ class Mobile_Api_Controller
 
         $args = [
             'post_per_page' => intval($perPage)?:5,
-            'page' => intval($page)?:1,
+            'paged' => intval($page)?:1,
             'post_type' => ['places'],
         ];
 
         $posts = get_posts($args);
 
         $data = [];
-        $data[] = $args;
+        // $data[] = $args;
 
         if (empty($posts)) {
             return rest_ensure_response($data);
