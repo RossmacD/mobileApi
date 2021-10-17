@@ -51,23 +51,17 @@ class Mobile_Api_Controller
      *
      * @param WP_REST_Request $request current request
      */
-    public function get_items($request)
+    public function get_items(WP_REST_Request $request)
     {
-        $perPage = 5;
-        if ( isset( $request['per_page'] )) {
-            $perPage = $request['per_page'];
-        }
+        $perPage = $request->get_param('per_page');
 
-        $page = 1;
-        if ( isset( $request['page'] )) {
-            $page = $request['page'];
-        }
+        $page = $request->get_param('page');
 
 
 
         $args = [
-            'post_per_page' => $perPage,
-            'page' => $page,
+            'post_per_page' => $perPage?:5,
+            'page' => $page?:1,
             'post_type' => ['places'],
         ];
 
