@@ -121,19 +121,29 @@ class Mobile_Api_Controller {
         
         $post_data["main_banner"] = wp_get_attachment_image_url($acfFields["main_banner"][0]);
 
-        $post_data["facilities"] =array();
         // $post_data["facilities"] = get_sub_field( 'term' , $post->ID );
-
-        // if( have_rows('facilities',$post->ID) ):
-        //     while ( have_rows('facilities') ) : the_row();
-        //         $facility = json_encode (new stdClass);
-        //         $facility->term = get_sub_field('term');
-        //         $facility->icon = get_sub_field('icon');
-        //         $post_data["facilities"][] = $facility;
-        //     endwhile;
-        // endif;
         
-        $post_data["facilities"][] = get_field( 'term', "facilities" );
+        // if( have_rows('facilities',$post->ID) ):
+            //     while ( have_rows('facilities') ) : the_row();
+            //         $facility = json_encode (new stdClass);
+            //         $facility->term = get_sub_field('term');
+            //         $facility->icon = get_sub_field('icon');
+            //         $post_data["facilities"][] = $facility;
+            //     endwhile;
+            // endif;
+            
+            // $post_data["facilities"][] = get_field( 'term', "facilities" );
+            
+            $post_data["facilities"] =array();
+
+
+        foreach($acfFields["facilities"] as $term_id ){
+                $facility = json_encode (new stdClass);
+                $facility->term  = get_field('term','facilities_'.$term_id);
+                $facility->icon  = get_field('icon','facilities_'.$term_id);
+                $post_data["facilities"][] = $facility;
+            }     
+
 
 
         $post_data['acf'] = $acfFields;
