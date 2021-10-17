@@ -141,8 +141,8 @@ class Mobile_Api_Controller {
 
         foreach($facilities as $term ){
                 $facility = json_encode (new stdClass);
-                $facility->term  = get_field('term','facilities_' . $term->term_id);
-                $facility->icon  = get_field('icon','facilities_' . $term->term_id);
+                $post_data["facilities"][]  = get_field('term','facilities_' . $term->term_id);
+                $post_data["facilities"][]  = get_field('icon','facilities_' . $term->term_id);
                 $post_data["facilities"][] = $facility;
                 $post_data["facilities"][] = $term;
             }     
