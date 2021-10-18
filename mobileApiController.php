@@ -145,6 +145,7 @@ class Mobile_Api_Controller
         $post_data['opening_times'] = wp_strip_all_tags($acfFields['opening_times']['text']);
         $post_data['admission'] = wp_strip_all_tags($acfFields['admission']['text']);
         $post_data['you_may_also_like'] = $acfFields['you_may_also_like']["places"];
+        $post_data['location'] = $acfFields["location_map"];
         // $post_data['acf'] = $acfFields;
 
         return rest_ensure_response($post_data);
