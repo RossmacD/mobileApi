@@ -134,10 +134,10 @@ class Mobile_Api_Controller
         // Get all image urls
         $post_data['gallery'] = [];
         foreach ($acfFields['gallery'] as $image) {
-            $post_data['gallery'][] = wp_get_attachment_image_url($image);
+            $post_data['gallery'][] = wp_get_attachment_image_url($image,[607,607]);
         }
 
-        $post_data['main_banner'] = wp_get_attachment_image_url($acfFields['main_banner'][0]);
+        $post_data['main_banner'] = wp_get_attachment_image_url($acfFields['main_banner'][0],[607,607]);
         $post_data['facilities'] = $this->getTermIcons('facilities', $post->ID);
         $post_data['restrictions'] = $this->getTermIcons('restrictions', $post->ID);
 
